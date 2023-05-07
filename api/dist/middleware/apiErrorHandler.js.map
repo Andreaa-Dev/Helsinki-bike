@@ -1,0 +1,1 @@
+{"version":3,"file":"apiErrorHandler.js","sourceRoot":"","sources":["../../src/middleware/apiErrorHandler.ts"],"names":[],"mappings":";;AAIA,mBAAyB,KAAe,EAAE,GAAY,EAAE,GAAa;IACnE,GAAG,CAAC,MAAM,CAAC,KAAK,CAAC,UAAU,CAAC,CAAC,IAAI,CAAC;QAChC,MAAM,EAAE,OAAO;QACf,UAAU,EAAE,KAAK,CAAC,UAAU;QAC5B,OAAO,EAAE,KAAK,CAAC,OAAO;KACvB,CAAC,CAAC;AACL,CAAC;AAND,4BAMC"}

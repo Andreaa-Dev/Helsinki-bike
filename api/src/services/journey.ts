@@ -1,6 +1,12 @@
 import { NotFoundError } from "../helper/apiError";
 import Journey, { JourneyDocument } from "../models/Journey";
 
+const createJourney = async (
+  journey: JourneyDocument
+): Promise<JourneyDocument> => {
+  return await journey.save();
+};
+
 const findAllJourneys = async (): Promise<JourneyDocument[]> => {
   return Journey.find().sort({ departure: 1 });
 };
@@ -14,4 +20,4 @@ const findJourneyById = async (journeyId: string): Promise<JourneyDocument> => {
   return foundJourney;
 };
 
-export default { findAllJourneys, findJourneyById };
+export default { createJourney, findAllJourneys, findJourneyById };
