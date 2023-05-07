@@ -2,6 +2,6 @@ import { Router } from "express";
 
 const router = Router();
 
-// router.post("/", permissionCheck, createContentController);
+router.get("/", getStationController);
 
 export default router;
