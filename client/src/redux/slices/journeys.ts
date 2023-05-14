@@ -14,7 +14,7 @@ const journeysSlice = createSlice({
   initialState,
   reducers: {
     getJourneyData: (state, action) => {
-      state.journeys = action.payload;
+      state.journeys = action.payload.journeys;
     },
     toggleLoading: (state, action) => {
       state.loading = action.payload;

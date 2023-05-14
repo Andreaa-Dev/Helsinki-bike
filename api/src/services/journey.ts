@@ -23,7 +23,7 @@ const findJourneyById = async (journeyId: string): Promise<JourneyDocument> => {
   const foundJourney = await Journey.findById(journeyId);
 
   if (!foundJourney) {
-    throw new NotFoundError(`Product ${journeyId} not found`);
+    throw new NotFoundError(`Journey ${journeyId} not found`);
   }
   return foundJourney;
 };
