@@ -17,7 +17,6 @@ type JourneyProp = {
 };
 
 export default function JourneyTablePagination({
-  journeys,
   handleChangePage,
   handleChangeRowsPerPage,
   page,
@@ -26,7 +25,7 @@ export default function JourneyTablePagination({
   return (
     <TablePagination
       component="div"
-      count={100}
+      count={10}
       page={page}
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}

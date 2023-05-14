@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Paper, TableContainer, Table } from "@mui/material";
 
-import { AppDispatch, RootState } from "../../redux/store";
-import { fetchJourneyData } from "../../redux/thunk/journeys";
-import JourneyTableHead from "./JourneyTableHead";
-import JourneyTableBody from "./JourneyTableBody";
-import JourneyTablePagination from "./JourneyTablePagination";
+import { AppDispatch, RootState } from "../redux/store";
+import { fetchJourneyData } from "../redux/thunk/journeys";
+import JourneyTableHead from "../components/journeys/JourneyTableHead";
+import JourneyTableBody from "../components/journeys/JourneyTableBody";
+import JourneyTablePagination from "../components/journeys/JourneyTablePagination";
 
 export default function JourneysList() {
   const [page, setPage] = useState(0);
@@ -31,7 +31,7 @@ export default function JourneysList() {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
   return (
