@@ -1,12 +1,9 @@
 import { Router } from "express";
 
-import {
-  getAllJourneysController,
-  getJourneyByIdController,
-} from "../controllers/journeys";
+import { getJourneys, getJourneyByIdController } from "../controllers/journeys";
 const router = Router();
 
-router.get("/", getAllJourneysController);
+router.get("/", getJourneys);
 router.get("/:id", getJourneyByIdController);
 
 export default router;

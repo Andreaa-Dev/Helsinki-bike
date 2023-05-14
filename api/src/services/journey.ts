@@ -7,8 +7,16 @@ const createJourney = async (
   return await journey.save();
 };
 
-const findAllJourneys = async (): Promise<JourneyDocument[]> => {
-  return Journey.find().sort({ departure: 1 });
+const findJourneys = async (
+  skip: number,
+  limit: number
+): Promise<{ journeys: JourneyDocument[]; totalPages: number }> => {
+  const journeys = await Journey.find().skip(skip).limit(limit);
+  const totalPages = await Journey.countDocuments();
+  return {
+    journeys,
+    totalPages,
+  };
 };
 
 const findJourneyById = async (journeyId: string): Promise<JourneyDocument> => {
@@ -20,4 +28,4 @@ const findJourneyById = async (journeyId: string): Promise<JourneyDocument> => {
   return foundJourney;
 };
 
-export default { createJourney, findAllJourneys, findJourneyById };
+export default { createJourney, findJourneys, findJourneyById };
