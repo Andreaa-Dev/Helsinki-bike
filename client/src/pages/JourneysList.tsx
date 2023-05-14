@@ -20,7 +20,6 @@ export default function JourneysList() {
   useEffect(() => {
     dispatch(fetchJourneyData(page, rowsPerPage));
   }, [dispatch, page, rowsPerPage]);
-  console.log(journeys, "data");
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,

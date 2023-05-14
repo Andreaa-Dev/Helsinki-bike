@@ -4,10 +4,13 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import logo from "../../assets/bike.png";
 
+import SearchForm from "../searchJourney/SearchForm";
+
 export default function NavBar() {
   return (
     <div className="navBar">
       <img src={logo} alt="bike" height="70px" width="70px" />
+      <SearchForm />
       <Link to="/">
         <Typography>Home</Typography>
       </Link>
