@@ -37,5 +37,8 @@ export const JourneySchema = new mongoose.Schema({
     type: Number,
   },
 });
-
+JourneySchema.index({
+  departureStationName: "text",
+  returnStationName: "text",
+});
 export default mongoose.model<JourneyDocument>("Journey", JourneySchema);

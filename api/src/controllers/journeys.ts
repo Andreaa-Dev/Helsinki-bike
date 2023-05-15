@@ -40,3 +40,29 @@ export const getJourneyByIdController = async (
     }
   }
 };
+
+export const searchJourneys = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    res.json(
+      await JourneyServices.searchJourneys(
+        req.query.search as string,
+        skip,
+        limit
+      )
+    );
+  } catch (error) {
+    if (error instanceof Error && error.name == "ValidationError") {
+      next(new BadRequestError("Invalid Request", error));
+    } else {
+      next(error);
+    }
+  }
+};

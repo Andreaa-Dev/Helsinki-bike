@@ -7,6 +7,7 @@ import { fetchJourneyData } from "../redux/thunk/journeys";
 import JourneyTableHead from "../components/journeys/JourneyTableHead";
 import JourneyTableBody from "../components/journeys/JourneyTableBody";
 import JourneyTablePagination from "../components/journeys/JourneyTablePagination";
+import SearchForm from "../components/searchJourney/SearchForm";
 
 export default function JourneysList() {
   const [page, setPage] = useState(1);
@@ -35,21 +36,24 @@ export default function JourneysList() {
     setPage(0);
   };
   return (
-    <Paper>
-      <TableContainer>
-        <Table stickyHeader aria-label="sticky table">
-          <JourneyTableHead />
-          <JourneyTableBody journeys={journeys} />
-        </Table>
-      </TableContainer>
-      <JourneyTablePagination
-        journeys={journeys}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        totalRows={totalRows}
-      />
-    </Paper>
+    <div>
+      <SearchForm page={page} rowsPerPage={rowsPerPage} />
+      <Paper>
+        <TableContainer>
+          <Table stickyHeader aria-label="sticky table">
+            <JourneyTableHead />
+            <JourneyTableBody journeys={journeys} />
+          </Table>
+        </TableContainer>
+        <JourneyTablePagination
+          journeys={journeys}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          totalRows={totalRows}
+        />
+      </Paper>
+    </div>
   );
 }

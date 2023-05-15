@@ -28,4 +28,15 @@ const findJourneyById = async (journeyId: string): Promise<JourneyDocument> => {
   return foundJourney;
 };
 
-export default { createJourney, findJourneys, findJourneyById };
+const searchJourneys = async (
+  text: string,
+  skip: number,
+  limit: number
+): Promise<JourneyDocument[]> => {
+  return await Journey.find({
+    $text: { $search: text },
+  })
+    .skip(skip)
+    .limit(limit);
+};
+export default { createJourney, findJourneys, findJourneyById, searchJourneys };

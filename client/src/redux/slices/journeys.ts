@@ -1,18 +1,19 @@
+import { searchJourneys } from "./../../../../api/src/controllers/journeys";
 import { createSlice } from "@reduxjs/toolkit";
 import { Journey } from "../../types/type";
 
 type InitialState = {
   loading: boolean;
-  journeys: Journey[];
   error: string;
   totalRows: number;
+  journeys: Journey[];
 };
 
 const initialState: InitialState = {
   loading: true,
-  journeys: [],
   error: "",
   totalRows: 0,
+  journeys: [],
 };
 
 const journeysSlice = createSlice({
@@ -25,6 +26,9 @@ const journeysSlice = createSlice({
     },
     toggleLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    searchJourneys: (state, action) => {
+      state.journeys = action.payload;
     },
   },
 });

@@ -11,16 +11,14 @@ type JourneyProp = {
 export default function JourneyTableBody({ journeys }: JourneyProp) {
   return (
     <TableBody>
-      {journeys.slice(0, 10).map((journey: Journey) => {
+      {journeys.map((journey: Journey) => {
         return (
           <TableRow key={uuidv4()}>
-            <TableCell>{journey.coveredDistance}</TableCell>
-            <TableCell>{new Date(journey.departure).toDateString()}</TableCell>
-            <TableCell>{journey.departureStationId}</TableCell>
+            <TableCell>{journey.coveredDistance / 1000}</TableCell>
+            {/* <TableCell>{new Date(journey.departure).toDateString()}</TableCell> */}
             <TableCell>{journey.departureStationName}</TableCell>
-            <TableCell>{journey.duration}</TableCell>
-            <TableCell>{new Date(journey.return).toDateString()}</TableCell>
-            <TableCell>{journey.returnStationId}</TableCell>
+            <TableCell>{Math.round(journey.duration / 60)}</TableCell>
+            {/* <TableCell>{new Date(journey.return).toDateString()}</TableCell> */}
             <TableCell>{journey.returnStationName}</TableCell>
           </TableRow>
         );
