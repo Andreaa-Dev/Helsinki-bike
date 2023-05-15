@@ -1,6 +1,12 @@
 import { searchJourneys } from "./../../../../api/src/controllers/journeys";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { Journey } from "../../types/type";
+
+type SortPayLoad = {
+  sortDirection: string | boolean;
+  field: keyof Journey;
+};
 
 type InitialState = {
   loading: boolean;
@@ -29,6 +35,31 @@ const journeysSlice = createSlice({
     },
     searchJourneys: (state, action) => {
       state.journeys = action.payload;
+    },
+    sortJourney: (state, action: PayloadAction<SortPayLoad>) => {
+      const { sortDirection, field } = action.payload;
+
+      if (sortDirection === "desc") {
+        state.journeys.sort((a, b) => {
+          if (a[field] < b[field]) {
+            return -1;
+          }
+          if (a[field] > b[field]) {
+            return 1;
+          }
+          return 0;
+        });
+        return;
+      }
+      state.journeys.sort((a, b) => {
+        if (a[field] > b[field]) {
+          return -1;
+        }
+        if (a[field] < b[field]) {
+          return 1;
+        }
+        return 0;
+      });
     },
   },
 });
