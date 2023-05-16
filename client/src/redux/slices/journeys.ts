@@ -28,10 +28,9 @@ const journeysSlice = createSlice({
     getJourneyData: (state, action) => {
       state.journeys = action.payload.journeys;
       state.totalRows = action.payload.totalPages;
+      state.loading = false;
     },
-    toggleLoading: (state, action) => {
-      state.loading = action.payload;
-    },
+
     searchJourneys: (state, action) => {
       state.journeys = action.payload;
     },

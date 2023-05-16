@@ -8,11 +8,13 @@ import JourneyTableHead from "../components/journeys/JourneyTableHead";
 import JourneyTableBody from "../components/journeys/JourneyTableBody";
 import JourneyTablePagination from "../components/journeys/JourneyTablePagination";
 import SearchForm from "../components/searchJourney/SearchForm";
+import Loading from "../components/loading/Loading";
 
 export default function JourneysList() {
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const isLoading = useSelector((state: RootState) => state.journeys.loading);
   const journeys = useSelector((state: RootState) => state.journeys.journeys);
   const totalRows = useSelector((state: RootState) => state.journeys.totalRows);
 
@@ -35,6 +37,10 @@ export default function JourneysList() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       <SearchForm page={page} rowsPerPage={rowsPerPage} />

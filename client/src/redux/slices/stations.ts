@@ -20,7 +20,7 @@ const stationsSlice = createSlice({
   name: "stations",
   initialState,
   reducers: {
-    getJourneyData: (state, action) => {
+    getStationData: (state, action) => {
       state.stations = action.payload.stations;
       state.totalRows = action.payload.totalPages;
     },

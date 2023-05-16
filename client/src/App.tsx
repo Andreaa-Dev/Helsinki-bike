@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
