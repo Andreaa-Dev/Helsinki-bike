@@ -1,4 +1,3 @@
-import { searchJourneys } from "./../../../../api/src/controllers/journeys";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Journey } from "../../types/type";
