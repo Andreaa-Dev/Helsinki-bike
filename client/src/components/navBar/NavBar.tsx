@@ -1,6 +1,4 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/bike.png";
@@ -8,15 +6,15 @@ import logo from "../../assets/bike.png";
 export default function NavBar() {
   return (
     <div className="navBar">
-      <img src={logo} alt="bike" height="70px" width="70px" />
-      <Link to="/">
-        <Typography>Home</Typography>
+      <img src={logo} alt="bike" height="50px" width="50px" />
+      <Link to="/" className="link">
+        Home
       </Link>
-      <Link to="/journeys">
-        <Typography>Journeys</Typography>
+      <Link to="/journeys" className="link">
+        Journeys
       </Link>
-      <Link to="/stations">
-        <Typography>Stations</Typography>
+      <Link to="/stations" className="link">
+        Stations
       </Link>
     </div>
   );

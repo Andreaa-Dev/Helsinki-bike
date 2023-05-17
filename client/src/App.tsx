@@ -6,7 +6,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
 import JourneysList from "./pages/JourneysList";
-import Stations from "./pages/Stations";
+import StationsList from "./pages/StationsList";
+import SingleStation from "./components/stations/singleStation/SingleStation";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/journeys" element={<JourneysList />} />
-        <Route path="/stations" element={<Stations />} />
+        <Route path="/stations" element={<StationsList />} />
+        <Route path="/stations/:id" element={<SingleStation />} />
       </Routes>
     </div>
   );

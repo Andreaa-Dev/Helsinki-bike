@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { Station } from "../../types/type";
 
@@ -23,9 +23,7 @@ const stationsSlice = createSlice({
     getStationData: (state, action) => {
       state.stations = action.payload.stations;
       state.totalRows = action.payload.totalPages;
-    },
-    toggleLoading: (state, action) => {
-      state.loading = action.payload;
+      state.loading = false;
     },
   },
 });

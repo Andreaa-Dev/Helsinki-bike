@@ -32,14 +32,14 @@ function Loading(props: CircularProgressProps & { value: number }) {
 }
 
 export default function CircularStatic() {
-  const [progress, setProgress] = React.useState(10);
+  const [progress, setProgress] = React.useState(20);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
-        prevProgress >= 100 ? 0 : prevProgress + 10
+        prevProgress >= 100 ? 0 : prevProgress + 20
       );
-    }, 800);
+    }, 500);
     return () => {
       clearInterval(timer);
     };

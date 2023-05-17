@@ -10,6 +10,7 @@ export type Journey = {
 };
 
 export type Station = {
+  _id: string;
   id: number;
   nimi: string;
   namn: string;
