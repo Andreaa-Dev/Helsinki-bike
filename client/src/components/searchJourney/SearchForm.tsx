@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import lodash from "lodash";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { journeysActions } from "../../redux/slices/journeys";
-import { RootState } from "../../redux/store";
 
 type Prop = {
   page: number;
@@ -15,7 +14,6 @@ type Prop = {
 export default function SearchForm({ page, rowsPerPage }: Prop) {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState("");
-  const journeys = useSelector((state: RootState) => state.journeys.journeys);
 
   const handleSearch = lodash.debounce((input: string) => {
     const url = `http://localhost:8000/journeys/search?search=${input}/page=${page}&limit=${rowsPerPage}`;
@@ -29,7 +27,6 @@ export default function SearchForm({ page, rowsPerPage }: Prop) {
     setUserInput(input);
     handleSearch(input);
   }
-  console.log(journeys, "serach");
 
   return (
     <div>

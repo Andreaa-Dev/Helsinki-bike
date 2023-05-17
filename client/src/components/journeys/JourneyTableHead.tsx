@@ -26,7 +26,6 @@ export default function JourneyTableHead() {
       <TableRow>
         <TableCell sortDirection={sortDirection}>
           <TableSortLabel
-            // active={orderBy === "covered distance"}
             direction={sortDirection ? sortDirection : undefined}
             onClick={() =>
               sortHandler(
@@ -44,10 +43,8 @@ export default function JourneyTableHead() {
           Covered Distance (km)
         </TableCell>
 
-        {/* <TableCell>Departure </TableCell> */}
         <TableCell>Departure Station </TableCell>
         <TableCell>Duration (minutes)</TableCell>
-        {/* <TableCell>Return</TableCell> */}
         <TableCell> Return Station </TableCell>
       </TableRow>
     </TableHead>

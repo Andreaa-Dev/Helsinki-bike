@@ -15,10 +15,8 @@ export default function JourneyTableBody({ journeys }: JourneyProp) {
         return (
           <TableRow key={uuidv4()}>
             <TableCell>{Math.round(journey.coveredDistance / 1000)}</TableCell>
-            {/* <TableCell>{new Date(journey.departure).toDateString()}</TableCell> */}
             <TableCell>{journey.departureStationName}</TableCell>
             <TableCell>{Math.round(journey.duration / 60)}</TableCell>
-            {/* <TableCell>{new Date(journey.return).toDateString()}</TableCell> */}
             <TableCell>{journey.returnStationName}</TableCell>
           </TableRow>
         );

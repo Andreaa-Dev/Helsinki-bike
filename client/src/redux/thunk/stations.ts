@@ -31,3 +31,13 @@ export function getStartingJourneyNum(stationId: number) {
     dispatch(singleStationActions.getStartingJourneyNum(startingJourneyNum));
   };
 }
+
+export function getEndingJourneyNum(stationId: number) {
+  const url = `http://localhost:8000/stations/journeys-end/${stationId}`;
+
+  return async (dispatch: AppDispatch) => {
+    const response = await fetch(url);
+    const endingJourneyNum = await response.json();
+    dispatch(singleStationActions.getEndingJourneyNum(endingJourneyNum));
+  };
+}

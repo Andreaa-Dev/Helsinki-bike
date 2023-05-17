@@ -11,21 +11,20 @@ import { visuallyHidden } from "@mui/utils";
 import { useDispatch } from "react-redux";
 
 import { Station } from "../../../types/type";
+import { stationsActions } from "../../../redux/slices/stations";
 
 export default function StationTableHead() {
-  const dispatch = useDispatch();
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-
+  const dispatch = useDispatch();
   function sortHandler(sortDirection: SortDirection, field: keyof Station) {
     setSortDirection(sortDirection);
-    // dispatch(journeysActions.sortJourney({ sortDirection, field }));
+    dispatch(stationsActions.sortStation({ sortDirection, field }));
   }
   return (
     <TableHead>
       <TableRow>
         <TableCell sortDirection={sortDirection}>
           <TableSortLabel
-            // active={orderBy === "covered distance"}
             direction={sortDirection ? sortDirection : undefined}
             onClick={() =>
               sortHandler(sortDirection === "desc" ? "asc" : "desc", "name")
@@ -40,8 +39,8 @@ export default function StationTableHead() {
           Name
         </TableCell>
         <TableCell>Address </TableCell>
-        <TableCell>Journeys starting</TableCell>
-        <TableCell> Journeys ending </TableCell>
+        <TableCell>City</TableCell>
+        <TableCell> Capacity </TableCell>
         <TableCell>More detail </TableCell>
       </TableRow>
     </TableHead>

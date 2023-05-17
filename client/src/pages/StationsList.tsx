@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Paper, TableContainer, Table } from "@mui/material";
+import { Paper, TableContainer, Table, Typography } from "@mui/material";
 
 import { AppDispatch, RootState } from "../redux/store";
 import { fetchStationData } from "../redux/thunk/stations";
@@ -36,7 +36,9 @@ export default function StationsList() {
 
   return (
     <div>
-      <h1>StationsList</h1>
+      <Typography variant="h3" sx={{ marginBottom: "2rem" }}>
+        Stations List
+      </Typography>
       <Paper>
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">

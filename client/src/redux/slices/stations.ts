@@ -1,6 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Station } from "../../types/type";
+
+type SortPayLoad = {
+  sortDirection: string | boolean;
+  field: keyof Station;
+};
 
 type InitialState = {
   loading: boolean;
@@ -24,6 +29,31 @@ const stationsSlice = createSlice({
       state.stations = action.payload.stations;
       state.totalRows = action.payload.totalPages;
       state.loading = false;
+    },
+    sortStation: (state, action: PayloadAction<SortPayLoad>) => {
+      const { sortDirection, field } = action.payload;
+
+      if (sortDirection === "desc") {
+        state.stations.sort((a, b) => {
+          if (a[field] < b[field]) {
+            return -1;
+          }
+          if (a[field] > b[field]) {
+            return 1;
+          }
+          return 0;
+        });
+        return;
+      }
+      state.stations.sort((a, b) => {
+        if (a[field] > b[field]) {
+          return -1;
+        }
+        if (a[field] < b[field]) {
+          return 1;
+        }
+        return 0;
+      });
     },
   },
 });

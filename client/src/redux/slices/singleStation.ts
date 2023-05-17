@@ -7,6 +7,7 @@ type InitialState = {
   error: string;
   singleStation: Station | null;
   startingJourneyNumber: number;
+  endingJourneyNumber: number;
 };
 
 const initialState: InitialState = {
@@ -14,6 +15,7 @@ const initialState: InitialState = {
   error: "",
   singleStation: null,
   startingJourneyNumber: 0,
+  endingJourneyNumber: 0,
 };
 
 const singleStationSlice = createSlice({
@@ -26,6 +28,9 @@ const singleStationSlice = createSlice({
     },
     getStartingJourneyNum: (state, action) => {
       state.startingJourneyNumber = action.payload;
+    },
+    getEndingJourneyNum: (state, action) => {
+      state.endingJourneyNumber = action.payload;
     },
   },
 });
