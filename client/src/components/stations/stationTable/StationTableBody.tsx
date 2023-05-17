@@ -6,7 +6,10 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import { Station } from "../../../types/type";
 import { AppDispatch } from "../../../redux/store";
-import { fetchSingleStationData } from "../../../redux/thunk/stations";
+import {
+  fetchSingleStationData,
+  getStartingJourneyNum,
+} from "../../../redux/thunk/stations";
 
 type Prop = {
   stations: Station[];
@@ -15,8 +18,12 @@ type Prop = {
 export default function StationTableBody({ stations }: Prop) {
   const dispatch = useDispatch<AppDispatch>();
 
-  function fetchSingleStation(singleStationId: string) {
+  function fetchSingleStationAndGetStartingJourneyNum(
+    singleStationId: string,
+    stationId: number
+  ) {
     dispatch(fetchSingleStationData(singleStationId));
+    dispatch(getStartingJourneyNum(stationId));
   }
   return (
     <TableBody>
@@ -29,7 +36,14 @@ export default function StationTableBody({ stations }: Prop) {
             <TableCell>{station._id}</TableCell>
             <TableCell>
               <Link to={`/stations/${station._id}`}>
-                <Button onClick={() => fetchSingleStation(station._id)}>
+                <Button
+                  onClick={() =>
+                    fetchSingleStationAndGetStartingJourneyNum(
+                      station._id,
+                      station.id
+                    )
+                  }
+                >
                   <NavigateNextIcon />
                 </Button>
               </Link>

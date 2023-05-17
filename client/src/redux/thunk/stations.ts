@@ -21,3 +21,13 @@ export function fetchSingleStationData(stationId: string) {
     dispatch(singleStationActions.getSingleStationData(singleStationData));
   };
 }
+
+export function getStartingJourneyNum(stationId: number) {
+  const url = `http://localhost:8000/stations/journeys-from/${stationId}`;
+
+  return async (dispatch: AppDispatch) => {
+    const response = await fetch(url);
+    const startingJourneyNum = await response.json();
+    dispatch(singleStationActions.getStartingJourneyNum(startingJourneyNum));
+  };
+}

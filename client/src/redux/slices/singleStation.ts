@@ -6,12 +6,14 @@ type InitialState = {
   loading: boolean;
   error: string;
   singleStation: Station | null;
+  startingJourneyNumber: number;
 };
 
 const initialState: InitialState = {
   loading: true,
   error: "",
   singleStation: null,
+  startingJourneyNumber: 0,
 };
 
 const singleStationSlice = createSlice({
@@ -21,6 +23,9 @@ const singleStationSlice = createSlice({
     getSingleStationData: (state, action) => {
       state.singleStation = action.payload;
       state.loading = false;
+    },
+    getStartingJourneyNum: (state, action) => {
+      state.startingJourneyNumber = action.payload;
     },
   },
 });
