@@ -11,12 +11,12 @@ const createStation = async (
 const findStations = async (
   skip: number,
   limit: number
-): Promise<{ stations: StationDocument[]; totalPages: number }> => {
+): Promise<{ stations: StationDocument[]; totalStations: number }> => {
   const stations = await Station.find().skip(skip).limit(limit);
-  const totalPages = await Station.countDocuments();
+  const totalStations = await Station.countDocuments();
   return {
     stations,
-    totalPages,
+    totalStations,
   };
 };
 

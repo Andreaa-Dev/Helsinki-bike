@@ -2,6 +2,39 @@ import { Request, Response, NextFunction } from "express";
 
 import { BadRequestError } from "../helper/apiError";
 import StationServices from "../services/stations";
+import Station from "../models/Station";
+
+export const createStation = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const newStation = new Station({
+    fid: req.body.fid,
+    id: req.body.id,
+    nimi: req.body.nimi,
+    namn: req.body.namn,
+    name: req.body.name,
+    osoite: req.body.osoite,
+    address: req.body.address,
+    kaupunki: req.body.kaupunki,
+    stad: req.body.stad,
+    operaattor: req.body.operaattor,
+    kapasiteet: req.body.kapasiteet,
+    x: req.body.x,
+    y: req.body.y,
+  });
+
+  try {
+    res.json(await StationServices.createStation(newStation));
+  } catch (error) {
+    if (error instanceof Error && error.name == "ValidationError") {
+      next(new BadRequestError("Invalid Request", error));
+    } else {
+      next(error);
+    }
+  }
+};
 
 export const getStations = async (
   req: Request,
@@ -45,9 +78,11 @@ export const countJourneysStartingFromStation = async (
   next: NextFunction
 ) => {
   try {
-    res.json(
-      await StationServices.countJourneysStartingFromStation(req.params.id)
-    );
+    res.json({
+      journeys: await StationServices.countJourneysStartingFromStation(
+        req.params.id
+      ),
+    });
   } catch (error) {
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));
@@ -63,7 +98,11 @@ export const countJourneysEndingAtStation = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await StationServices.countJourneysEndingAtStation(req.params.id));
+    res.json({
+      journeys: await StationServices.countJourneysEndingAtStation(
+        req.params.id
+      ),
+    });
   } catch (error) {
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));

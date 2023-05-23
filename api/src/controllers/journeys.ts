@@ -1,7 +1,34 @@
 import { Request, Response, NextFunction } from "express";
 import { BadRequestError } from "../helper/apiError";
 import JourneyServices from "../services/journey";
+import Journey from "../models/Journey";
 
+export const createJourney = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const newJourney = new Journey({
+    departure: req.body.departure,
+    return: req.body.return,
+    departureStationId: req.body.departureStationId,
+    departureStationName: req.body.departureStationName,
+    returnStationId: req.body.returnStationId,
+    returnStationName: req.body.returnStationName,
+    coveredDistance: req.body.coveredDistance,
+    duration: req.body.duration,
+  });
+
+  try {
+    res.json(await JourneyServices.createJourney(newJourney));
+  } catch (error) {
+    if (error instanceof Error && error.name == "ValidationError") {
+      next(new BadRequestError("Invalid Request", error));
+    } else {
+      next(error);
+    }
+  }
+};
 export const getJourneys = async (
   req: Request,
   res: Response,
@@ -14,6 +41,7 @@ export const getJourneys = async (
   try {
     res.json(await JourneyServices.findJourneys(skip, limit));
   } catch (error) {
+    console.log(error);
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));
     } else {
@@ -27,11 +55,8 @@ export const getJourneyByIdController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 10;
-  const skip = (page - 1) * limit;
   try {
-    res.json(await JourneyServices.findJourneys(skip, limit));
+    res.json(await JourneyServices.findJourneyById(req.params.id));
   } catch (error) {
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));

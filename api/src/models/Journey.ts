@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
 
-export type JourneyDocument = Document & {
+export type Journey = {
   departure: Date;
   return: Date;
   departureStationId: number;
@@ -10,6 +10,7 @@ export type JourneyDocument = Document & {
   coveredDistance: number;
   duration: number;
 };
+export type JourneyDocument = Document & Journey;
 
 export const JourneySchema = new mongoose.Schema({
   departure: {

@@ -10,12 +10,12 @@ const createJourney = async (
 const findJourneys = async (
   skip: number,
   limit: number
-): Promise<{ journeys: JourneyDocument[]; totalPages: number }> => {
+): Promise<{ journeys: JourneyDocument[]; totalJourneys: number }> => {
   const journeys = await Journey.find().skip(skip).limit(limit);
-  const totalPages = await Journey.countDocuments();
+  const totalJourneys = await Journey.countDocuments();
   return {
     journeys,
-    totalPages,
+    totalJourneys,
   };
 };
 

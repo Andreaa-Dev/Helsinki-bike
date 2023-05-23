@@ -5,10 +5,12 @@ import {
   getStationById,
   countJourneysEndingAtStation,
   countJourneysStartingFromStation,
+  createStation,
 } from "../controllers/stations";
 
 const router = Router();
 
+router.post("/", createStation);
 router.get("/", getStations);
 router.get("/:id", getStationById);
 router.get("/journeys-from/:id", countJourneysStartingFromStation);

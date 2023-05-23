@@ -1,6 +1,7 @@
 import mongoose, { Document } from "mongoose";
 
-export type StationDocument = Document & {
+export type Station = {
+  fid: number;
   id: number;
   nimi: string;
   namn: string;
@@ -14,8 +15,12 @@ export type StationDocument = Document & {
   x: number;
   y: number;
 };
-
+export type StationDocument = Document & Station;
 export const StationSchema = new mongoose.Schema({
+  fid: {
+    type: Number,
+  },
+
   id: {
     type: Number,
   },
