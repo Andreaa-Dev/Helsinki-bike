@@ -16,6 +16,9 @@ export default function NavBar() {
       <Link href="/stations" underline="none">
         Stations
       </Link>
+      <Link href="/map" underline="none">
+        Map
+      </Link>
     </div>
   );
 }
