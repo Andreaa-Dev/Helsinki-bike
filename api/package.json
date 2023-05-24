@@ -30,6 +30,9 @@
     "start": "nodemon --watch \"src/*\" --ext \"ts,json\" --ignore \"src//.spec.ts\" --exec \"ts-node src/server.ts\"",
     "ts-build": "tsc",
     "import": "ts-node src/scripts/database.ts",
-    "test": "jest --detect-open-handles --forceExit --verbose --concurrency=1"
+    "test": "jest --detect-open-handles --forceExit --verbose",
+    "validate-journeys": "ts-node src/scripts/journey-validate.ts",
+    "import-journeys": "sh ./src/scripts/journeys-import.sh",
+    "import-stations": "sh ./src/scripts/stations-import.sh"
   }
 }

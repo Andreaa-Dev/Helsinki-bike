@@ -12,6 +12,7 @@ type InitialState = {
   error: string;
   totalRows: number;
   journeys: Journey[];
+  searchJourneys: Journey[];
 };
 
 const initialState: InitialState = {
@@ -19,6 +20,7 @@ const initialState: InitialState = {
   error: "",
   totalRows: 0,
   journeys: [],
+  searchJourneys: [],
 };
 
 const journeysSlice = createSlice({
@@ -27,13 +29,14 @@ const journeysSlice = createSlice({
   reducers: {
     getJourneyData: (state, action) => {
       state.journeys = action.payload.journeys;
-      state.totalRows = action.payload.totalPages;
+      state.totalRows = action.payload.totalJourneys;
       state.loading = false;
     },
 
     searchJourneys: (state, action) => {
-      state.journeys = action.payload;
+      state.searchJourneys = action.payload;
     },
+
     sortJourney: (state, action: PayloadAction<SortPayLoad>) => {
       const { sortDirection, field } = action.payload;
 

@@ -28,7 +28,9 @@ export function getStartingJourneyNum(stationId: number) {
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url);
     const startingJourneyNum = await response.json();
-    dispatch(singleStationActions.getStartingJourneyNum(startingJourneyNum));
+    dispatch(
+      singleStationActions.getStartingJourneyNum(startingJourneyNum.journeys)
+    );
   };
 }
 
@@ -38,6 +40,8 @@ export function getEndingJourneyNum(stationId: number) {
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url);
     const endingJourneyNum = await response.json();
-    dispatch(singleStationActions.getEndingJourneyNum(endingJourneyNum));
+    dispatch(
+      singleStationActions.getEndingJourneyNum(endingJourneyNum.journeys)
+    );
   };
 }

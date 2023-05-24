@@ -1,4 +1,5 @@
 export type Journey = {
+  _id: string;
   departure: Date;
   return: Date;
   departureStationId: number;

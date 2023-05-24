@@ -16,6 +16,9 @@ export default function JourneysList() {
 
   const isLoading = useSelector((state: RootState) => state.journeys.loading);
   const journeys = useSelector((state: RootState) => state.journeys.journeys);
+  const searchJourneys = useSelector(
+    (state: RootState) => state.journeys.searchJourneys
+  );
   const totalRows = useSelector((state: RootState) => state.journeys.totalRows);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -41,6 +44,9 @@ export default function JourneysList() {
   if (isLoading) {
     return <Loading />;
   }
+
+  const renderJourneys = searchJourneys.length > 0 ? searchJourneys : journeys;
+
   return (
     <div>
       <SearchForm page={page} rowsPerPage={rowsPerPage} />
@@ -48,11 +54,11 @@ export default function JourneysList() {
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <JourneyTableHead />
-            <JourneyTableBody journeys={journeys} />
+            <JourneyTableBody journeys={renderJourneys} />
           </Table>
         </TableContainer>
         <JourneyTablePagination
-          journeys={journeys}
+          journeys={renderJourneys}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           page={page}

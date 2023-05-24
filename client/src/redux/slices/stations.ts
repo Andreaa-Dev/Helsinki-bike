@@ -27,7 +27,7 @@ const stationsSlice = createSlice({
   reducers: {
     getStationData: (state, action) => {
       state.stations = action.payload.stations;
-      state.totalRows = action.payload.totalPages;
+      state.totalRows = action.payload.totalStations;
       state.loading = false;
     },
     sortStation: (state, action: PayloadAction<SortPayLoad>) => {

@@ -33,6 +33,14 @@ const searchJourneys = async (
   skip: number,
   limit: number
 ): Promise<JourneyDocument[]> => {
+  // // way 1
+  // return await Journey.find({
+  //   $or: [
+  //     { departureStationName: { $regex: text, $options: "i" } },
+  //     { returnStationName: { $regex: text, $options: "i" } },
+  //   ],
+  // });
+  // way 2
   return await Journey.find({
     $text: { $search: text },
   })

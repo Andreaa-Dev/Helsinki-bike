@@ -19,6 +19,9 @@ export default function NavBar() {
       <Link href="/map" underline="none">
         Map
       </Link>
+      <Link href="/form" underline="none">
+        Form
+      </Link>
     </div>
   );
 }

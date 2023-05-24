@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { TextField } from "@mui/material";
-import lodash from "lodash";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
@@ -15,27 +14,39 @@ export default function SearchForm({ page, rowsPerPage }: Prop) {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState("");
 
-  const handleSearch = lodash.debounce((input: string) => {
-    const url = `http://localhost:8000/journeys/search?search=${input}/page=${page}&limit=${rowsPerPage}`;
-    axios.get(url).then((response) => {
-      dispatch(journeysActions.searchJourneys(response.data));
-    });
-  }, 500);
+  const search = useCallback(
+    (url: string) => {
+      axios.get(url).then((response) => {
+        dispatch(journeysActions.searchJourneys(response.data));
+      });
+    },
+    [dispatch]
+  );
 
   function onChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.target.value;
     setUserInput(input);
-    handleSearch(input);
   }
+
+  useEffect(() => {
+    const url = `http://localhost:8000/journeys/search?search=${userInput}&page=${page}&limit=${rowsPerPage}`;
+
+    const id = setTimeout(() => search(url), 500);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, [userInput, page, rowsPerPage, search]);
 
   return (
     <div>
       <TextField
         id="standard-basic"
-        label="Standard"
+        label="Search"
         variant="standard"
         onChange={onChangeHandler}
         value={userInput}
+        helperText="Please enter the station name"
       />
     </div>
   );

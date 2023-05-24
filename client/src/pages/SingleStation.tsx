@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
 
-import { AppDispatch, RootState } from "../../../redux/store";
-import Loading from "../../loading/Loading";
+import Loading from "../components/loading/Loading";
 import {
   fetchSingleStationData,
-  getStartingJourneyNum,
   getEndingJourneyNum,
-} from "../../../redux/thunk/stations";
+  getStartingJourneyNum,
+} from "../redux/thunk/stations";
+import { AppDispatch, RootState } from "../redux/store";
 
 export default function SingleStation() {
   const isLoading = useSelector(
@@ -24,12 +24,16 @@ export default function SingleStation() {
   const endingJourneyNumber = useSelector(
     (state: RootState) => state.singleStation.endingJourneyNumber
   );
+  const { id } = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    dispatch(fetchSingleStationData(id as string));
+  }, [dispatch, id]);
+
+  useEffect(() => {
     if (singleStation) {
-      dispatch(fetchSingleStationData(singleStation._id));
       dispatch(getStartingJourneyNum(singleStation.id));
       dispatch(getEndingJourneyNum(singleStation.id));
     }
@@ -43,17 +47,16 @@ export default function SingleStation() {
   }
   return (
     <div>
-      SingleStation
-      <p> Station name: {singleStation.name}</p>
-      <p> Address: {singleStation.address}</p>
-      <p>
+      <Typography> Station name: {singleStation.name}</Typography>
+      <Typography> Address: {singleStation.address}</Typography>
+      <Typography>
         Total number of journeys starting from the station:
-        <b>{startingJourneyNumber}</b>
-      </p>
-      <p>
+        <b> {startingJourneyNumber}</b>
+      </Typography>
+      <Typography>
         Total number of journeys ending at the station:
         <b> {endingJourneyNumber}</b>
-      </p>
+      </Typography>
       <Link to="/stations">
         <Button variant="outlined">Back to all stations</Button>
       </Link>
