@@ -1,0 +1,25 @@
+name: fullstack-ci-cd
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build & deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Render deploy
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          retries: 1
