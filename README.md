@@ -1,6 +1,6 @@
 # Helsinki bike
 
-live version for backend: `https://solita-dev.onrender.com/`
+live version for backend: `https://solita-dev.onrender.com/` and frontend: `https://helsinki-bike.onrender.com/`
 
 ## Running locally
 
