@@ -1,7 +1,11 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, Field, Form, ErrorMessage, FormikState } from "formik";
 import * as Yup from "yup";
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import axios from "axios";
+import { backendUrl } from "../../redux/thunk/journeys";
 
 const validationSchema = Yup.object().shape({
   departure: Yup.date().required(" Departure date is required"),
@@ -29,16 +33,54 @@ const validationSchema = Yup.object().shape({
   returnStationName: Yup.string().required("Return station name is required"),
 });
 
-const initialValues = {
-  date: "",
-  number: "",
-  text: "",
+type InitialValue = {
+  departure: Date;
+  return: Date;
+  departureStationId: number;
+  departureStationName: string;
+  returnStationId: number;
+  returnStationName: string;
+  coveredDistance: number;
+  duration: number;
 };
 
-const JourneyForm = () => {
-  const handleSubmit = () => {
-    console.log("hi");
+const initialValues: InitialValue = {
+  departure: new Date(),
+  return: new Date(),
+  departureStationId: 0,
+  departureStationName: "",
+  returnStationId: 0,
+  returnStationName: "",
+  coveredDistance: 0,
+  duration: 0,
+};
+
+const url = `${backendUrl}/journeys`;
+
+export default function JourneyForm() {
+  const [open, setOpen] = useState(false);
+
+  function handleClose(event?: React.SyntheticEvent | Event, reason?: string) {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  }
+  type ResetForm = {
+    resetForm: (nextState?: Partial<FormikState<InitialValue>>) => void;
   };
+
+  function handleSubmit(values: InitialValue, { resetForm }: ResetForm) {
+    axios
+      .post(url, values)
+      .then((response) => {
+        if (response.status === 200) {
+          setOpen(true);
+          resetForm();
+        } else <p> Please try again</p>;
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div>
@@ -50,54 +92,110 @@ const JourneyForm = () => {
       >
         {({ errors, touched }) => (
           <Form>
-            <div>
-              <label htmlFor="date">Departure date:</label>
+            <Box className="formItem">
+              <Typography>Departure date: </Typography>
               <Field
                 as={TextField}
                 id="date"
                 name="departure"
                 type="date"
                 variant="outlined"
-                error={Boolean(errors.date && touched.date)}
-                helperText={<ErrorMessage name="date" />}
+                error={Boolean(errors.departure && touched.departure)}
+                helperText={<ErrorMessage name="departure" />}
               />
-            </div>
-            <div>
-              <label htmlFor="date">Return date:</label>
+            </Box>
+            <Box className="formItem">
+              <Typography>Return date: </Typography>
               <Field
                 as={TextField}
                 id="date"
                 name="return"
                 type="date"
                 variant="outlined"
-                error={Boolean(errors.date && touched.date)}
-                helperText={<ErrorMessage name="date" />}
+                error={Boolean(errors.return && touched.return)}
+                helperText={<ErrorMessage name="return" />}
               />
-            </div>
-            <div>
-              <label htmlFor="number">Return station id:</label>
+            </Box>
+            <Box className="formItem">
+              <Typography>Departure station id:</Typography>
+              <Field
+                as={TextField}
+                id="number"
+                name="departureStationId"
+                type="number"
+                variant="outlined"
+                error={Boolean(
+                  errors.departureStationId && touched.departureStationId
+                )}
+                helperText={<ErrorMessage name="departureStationId" />}
+              />
+            </Box>
+            <Box className="formItem">
+              <Typography>Return station id:</Typography>
               <Field
                 as={TextField}
                 id="number"
                 name="returnStationId"
                 type="number"
                 variant="outlined"
-                error={Boolean(errors.number && touched.number)}
-                helperText={<ErrorMessage name="number" />}
+                error={Boolean(
+                  errors.returnStationId && touched.returnStationId
+                )}
+                helperText={<ErrorMessage name="returnStationId" />}
               />
-            </div>
-
-            <div>
-              <label htmlFor="text">Text:</label>
+            </Box>
+            <Box className="formItem">
+              <Typography>Cover distance:</Typography>
+              <Field
+                as={TextField}
+                id="number"
+                name="coveredDistance"
+                type="number"
+                variant="outlined"
+                error={Boolean(
+                  errors.coveredDistance && touched.coveredDistance
+                )}
+                helperText={<ErrorMessage name="coveredDistance" />}
+              />
+            </Box>
+            <Box className="formItem">
+              <Typography>Duration:</Typography>
+              <Field
+                as={TextField}
+                id="number"
+                name="duration"
+                type="number"
+                variant="outlined"
+                error={Boolean(errors.duration && touched.duration)}
+                helperText={<ErrorMessage name="duration" />}
+              />
+            </Box>
+            <Box className="formItem">
+              <Typography>Departure station name:</Typography>
               <Field
                 as={TextField}
                 id="text"
-                name="text"
+                name="departureStationName"
                 variant="outlined"
-                //   error={Boolean(errors.text && touched.text)}
-                helperText={<ErrorMessage name="text" />}
+                error={Boolean(
+                  errors.departureStationName && touched.departureStationName
+                )}
+                helperText={<ErrorMessage name="departureStationName" />}
               />
-            </div>
+            </Box>
+            <Box className="formItem">
+              <Typography>Return station name:</Typography>
+              <Field
+                as={TextField}
+                id="text"
+                name="returnStationName"
+                variant="outlined"
+                error={Boolean(
+                  errors.returnStationName && touched.returnStationName
+                )}
+                helperText={<ErrorMessage name="returnStationName" />}
+              />
+            </Box>
 
             <Button type="submit" variant="contained">
               Submit
@@ -105,8 +203,11 @@ const JourneyForm = () => {
           </Form>
         )}
       </Formik>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" variant="filled">
+          A journey is added
+        </Alert>
+      </Snackbar>
     </div>
   );
-};
-
-export default JourneyForm;
+}

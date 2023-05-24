@@ -2,8 +2,10 @@ import { journeysActions } from "../slices/journeys";
 import { singleJourneyActions } from "../slices/singleJourney";
 import { AppDispatch } from "../store";
 
+export const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export function fetchJourneyData(page: number, limit: number) {
-  const url = `http://localhost:8000/journeys?page=${page}&limit=${limit}`;
+  const url = `${backendUrl}/journeys?page=${page}&limit=${limit}`;
 
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url);
@@ -13,7 +15,7 @@ export function fetchJourneyData(page: number, limit: number) {
 }
 
 export function fetchSingleJourneyData(journeyId: string) {
-  const url = `http://localhost:8000/journeys/${journeyId}`;
+  const url = `${backendUrl}/journeys/${journeyId}`;
 
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url);

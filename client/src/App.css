@@ -38,3 +38,12 @@
   margin: 12px;
   border-radius: 4px;
 }
+
+.formItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 700px;
+  align-items: center;
+  margin: 20px;
+}

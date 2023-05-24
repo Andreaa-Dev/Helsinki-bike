@@ -1,4 +1,4 @@
-import Express from "express";
+import Express, { Request, Response } from "express";
 import cors from "cors";
 
 import apiErrorHandler from "./middleware/apiErrorHandler";
@@ -12,6 +12,7 @@ app.use(cors());
 
 app.use("/journeys", journeyRouter);
 app.use("/stations", stationRouter);
+app.use("/heath", (req: Request, res: Response) => res.status(200));
 
 app.use(apiErrorHandler);
 

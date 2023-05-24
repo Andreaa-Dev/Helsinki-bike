@@ -7,7 +7,7 @@ import { fetchStationData } from "../../../redux/thunk/stations";
 
 export default function StationMap() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -29,11 +29,6 @@ export default function StationMap() {
       center: [24.945831, 60.192059],
       zoom: 9,
     });
-
-    const popup = new mapboxgl.Popup({ closeOnClick: false })
-      .setLngLat([24.835132, 60.178762])
-      .setHTML("<h1>Hello World!</h1>")
-      .addTo(map.current);
   }, []);
 
   useEffect(() => {
