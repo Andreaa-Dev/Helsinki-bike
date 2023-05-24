@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use("/journeys", journeyRouter);
 app.use("/stations", stationRouter);
-app.use("/heath", (req: Request, res: Response) => res.status(200).send());
+app.use("/", (req: Request, res: Response) => res.status(200).send());
 
 app.use(apiErrorHandler);
 
