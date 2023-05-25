@@ -39,11 +39,22 @@
   border-radius: 4px;
 }
 
+.journeyForm {
+  margin: auto;
+  width: 500px;
+}
+
 .formItem {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 700px;
-  align-items: center;
+  justify-content: space-between;
   margin: 20px;
+}
+
+.formField {
+  width: 200px;
+}
+
+.formTitle {
+  width: 200px;
 }

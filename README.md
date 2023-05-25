@@ -21,6 +21,7 @@ For getting stations: `curl http://localhost:8000/stations\?page=1\&limit=10`
 ## Tech stack
 
 - TypeScript
+- Redis
 - React
 - MUI
 - Redux Toolkit

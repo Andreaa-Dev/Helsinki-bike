@@ -84,130 +84,148 @@ export default function JourneyForm() {
 
   return (
     <div>
-      <h1>Journey form </h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Box className="formItem">
-              <Typography>Departure date: </Typography>
-              <Field
-                as={TextField}
-                id="date"
-                name="departure"
-                type="date"
-                variant="outlined"
-                error={Boolean(errors.departure && touched.departure)}
-                helperText={<ErrorMessage name="departure" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Return date: </Typography>
-              <Field
-                as={TextField}
-                id="date"
-                name="return"
-                type="date"
-                variant="outlined"
-                error={Boolean(errors.return && touched.return)}
-                helperText={<ErrorMessage name="return" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Departure station id:</Typography>
-              <Field
-                as={TextField}
-                id="number"
-                name="departureStationId"
-                type="number"
-                variant="outlined"
-                error={Boolean(
-                  errors.departureStationId && touched.departureStationId
-                )}
-                helperText={<ErrorMessage name="departureStationId" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Return station id:</Typography>
-              <Field
-                as={TextField}
-                id="number"
-                name="returnStationId"
-                type="number"
-                variant="outlined"
-                error={Boolean(
-                  errors.returnStationId && touched.returnStationId
-                )}
-                helperText={<ErrorMessage name="returnStationId" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Cover distance:</Typography>
-              <Field
-                as={TextField}
-                id="number"
-                name="coveredDistance"
-                type="number"
-                variant="outlined"
-                error={Boolean(
-                  errors.coveredDistance && touched.coveredDistance
-                )}
-                helperText={<ErrorMessage name="coveredDistance" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Duration:</Typography>
-              <Field
-                as={TextField}
-                id="number"
-                name="duration"
-                type="number"
-                variant="outlined"
-                error={Boolean(errors.duration && touched.duration)}
-                helperText={<ErrorMessage name="duration" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Departure station name:</Typography>
-              <Field
-                as={TextField}
-                id="text"
-                name="departureStationName"
-                variant="outlined"
-                error={Boolean(
-                  errors.departureStationName && touched.departureStationName
-                )}
-                helperText={<ErrorMessage name="departureStationName" />}
-              />
-            </Box>
-            <Box className="formItem">
-              <Typography>Return station name:</Typography>
-              <Field
-                as={TextField}
-                id="text"
-                name="returnStationName"
-                variant="outlined"
-                error={Boolean(
-                  errors.returnStationName && touched.returnStationName
-                )}
-                helperText={<ErrorMessage name="returnStationName" />}
-              />
-            </Box>
+      <Typography variant="h3"> Journey form</Typography>
+      <div className="journeyForm">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <Box className="formItem">
+                <Typography className="formTitle">Departure date: </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="date"
+                  name="departure"
+                  type="date"
+                  variant="outlined"
+                  error={Boolean(errors.departure && touched.departure)}
+                  helperText={<ErrorMessage name="departure" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">Return date: </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="date"
+                  name="return"
+                  type="date"
+                  variant="outlined"
+                  error={Boolean(errors.return && touched.return)}
+                  helperText={<ErrorMessage name="return" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">
+                  Departure station id:
+                </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="number"
+                  name="departureStationId"
+                  type="number"
+                  variant="outlined"
+                  error={Boolean(
+                    errors.departureStationId && touched.departureStationId
+                  )}
+                  helperText={<ErrorMessage name="departureStationId" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">
+                  Return station id:
+                </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="number"
+                  name="returnStationId"
+                  type="number"
+                  variant="outlined"
+                  error={Boolean(
+                    errors.returnStationId && touched.returnStationId
+                  )}
+                  helperText={<ErrorMessage name="returnStationId" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">Cover distance:</Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="number"
+                  name="coveredDistance"
+                  type="number"
+                  variant="outlined"
+                  error={Boolean(
+                    errors.coveredDistance && touched.coveredDistance
+                  )}
+                  helperText={<ErrorMessage name="coveredDistance" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">Duration:</Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="number"
+                  name="duration"
+                  type="number"
+                  variant="outlined"
+                  error={Boolean(errors.duration && touched.duration)}
+                  helperText={<ErrorMessage name="duration" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">
+                  Departure station name:
+                </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="text"
+                  name="departureStationName"
+                  variant="outlined"
+                  error={Boolean(
+                    errors.departureStationName && touched.departureStationName
+                  )}
+                  helperText={<ErrorMessage name="departureStationName" />}
+                />
+              </Box>
+              <Box className="formItem">
+                <Typography className="formTitle">
+                  Return station name:
+                </Typography>
+                <Field
+                  className="formField"
+                  as={TextField}
+                  id="text"
+                  name="returnStationName"
+                  variant="outlined"
+                  error={Boolean(
+                    errors.returnStationName && touched.returnStationName
+                  )}
+                  helperText={<ErrorMessage name="returnStationName" />}
+                />
+              </Box>
 
-            <Button type="submit" variant="contained">
-              Submit
-            </Button>
-          </Form>
-        )}
-      </Formik>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" variant="filled">
-          A journey is added
-        </Alert>
-      </Snackbar>
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" variant="filled">
+            A journey is added
+          </Alert>
+        </Snackbar>
+      </div>
     </div>
   );
 }
