@@ -21,5 +21,10 @@ For getting stations: `curl http://localhost:8000/stations\?page=1\&limit=10`
 ## Tech stack
 
 - TypeScript
+- React
 - MUI
 - Redux Toolkit
+- Express
+- MongoDB
+- mapbox-gl (Map)
+- Formik and Yup (form validation)
