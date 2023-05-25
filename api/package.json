@@ -21,6 +21,7 @@
     "mongoose": "^7.1.0",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
+    "redis": "^4.6.6",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",

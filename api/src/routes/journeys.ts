@@ -6,11 +6,13 @@ import {
   searchJourneys,
   createJourney,
 } from "../controllers/journeys";
+import { cacheHandler } from "../middleware/cacheHandler";
+
 const router = Router();
 
 router.post("/", createJourney);
-router.get("/search", searchJourneys);
-router.get("/", getJourneys);
+router.get("/search", cacheHandler, searchJourneys);
+router.get("/", cacheHandler, getJourneys);
 router.get("/:id", getJourneyByIdController);
 
 export default router;

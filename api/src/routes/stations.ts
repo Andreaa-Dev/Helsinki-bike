@@ -7,12 +7,13 @@ import {
   countJourneysStartingFromStation,
   createStation,
 } from "../controllers/stations";
+import { cacheHandler } from "../middleware/cacheHandler";
 
 const router = Router();
 
 router.post("/", createStation);
-router.get("/", getStations);
-router.get("/:id", getStationById);
+router.get("/", cacheHandler, getStations);
+router.get("/:id", cacheHandler, getStationById);
 router.get("/journeys-from/:id", countJourneysStartingFromStation);
 router.get("/journeys-end/:id", countJourneysEndingAtStation);
 
