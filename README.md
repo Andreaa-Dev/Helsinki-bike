@@ -4,6 +4,18 @@ Live version for backend: `https://solita-dev.onrender.com/` and frontend: `http
 
 This repo has the code for both frontend and backend. Both were built with typescript. The backend uses express, mongodb and redis for fast data retrieval. Frontend is built with react and redux for maintaining state.
 
+## Tech stack
+
+- TypeScript
+- Redis
+- React
+- MUI
+- Redux Toolkit
+- Express
+- MongoDB
+- mapbox-gl (Map)
+- Formik and Yup (form validation)
+
 ## Running locally
 
 ### Running backend using Docker (recommended)
@@ -35,17 +47,9 @@ You should have node 16.x installed. From within `api` folder in your terminal:
 From within `client` folder:
 
 1. Install dependencies: `yarn install`
-2. Create a `.env.local` file in `client` and copy contents from `.env.example`.
+2. Create a `.env.local` file in `client` and copy contents from `.env.example`, fill in the values for mapbox token and backend address. By default backend will run at port 8000.
 3. Run the react app: `yarn start`
 
-## Tech stack
+## Running test
 
-- TypeScript
-- Redis
-- React
-- MUI
-- Redux Toolkit
-- Express
-- MongoDB
-- mapbox-gl (Map)
-- Formik and Yup (form validation)
+Ton run integration tests for the api, install dependencies first for the backend, then run `yarn run test`
