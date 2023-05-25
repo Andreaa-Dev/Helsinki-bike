@@ -5,6 +5,12 @@ import mapboxgl from "mapbox-gl";
 import { RootState, AppDispatch } from "../../../redux/store";
 import { fetchStationData } from "../../../redux/thunk/stations";
 
+mapboxgl.accessToken = process.env.REACT_APP_ACCESS_TOKEN as string;
+// @ts-ignore
+mapboxgl.workerClass =
+  // eslint-disable-next-line import/no-webpack-loader-syntax
+  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+
 export default function StationMap() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(100);
