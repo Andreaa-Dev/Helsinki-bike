@@ -1,7 +1,7 @@
+import { backendUrl } from "./journeys";
 import { singleStationActions } from "../slices/singleStation";
 import { stationsActions } from "../slices/stations";
 import { AppDispatch } from "../store";
-import { backendUrl } from "./journeys";
 
 export function fetchStationData(page: number, limit: number) {
   const stationsUrl = `${backendUrl}/stations?page=${page}&limit=${limit}`;
@@ -36,7 +36,7 @@ export function getStartingJourneyNum(stationId: number) {
 }
 
 export function getEndingJourneyNum(stationId: number) {
-  const url = `http://localhost:8000/stations/journeys-end/${stationId}`;
+  const url = `${backendUrl}/stations/journeys-end/${stationId}`;
 
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url);

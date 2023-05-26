@@ -22,7 +22,6 @@ export default function JourneyTablePagination({
   handleChangeRowsPerPage,
   page,
   rowsPerPage,
-  journeys,
   totalRows,
 }: JourneyProp) {
   return (

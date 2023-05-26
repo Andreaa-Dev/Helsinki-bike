@@ -10,15 +10,25 @@ type JourneyProp = {
   journeys: Journey[];
 };
 
+function convertDistance(distance: number) {
+  // convert from m to km
+  return Math.ceil((distance * 10) / 1000) / 10;
+}
+
+function convertDuration(duration: number) {
+  // convert from second to minute
+  return Math.ceil((duration * 10) / 60) / 10;
+}
+
 export default function JourneyTableBody({ journeys }: JourneyProp) {
   return (
     <TableBody>
       {journeys.map((journey: Journey) => {
         return (
           <TableRow key={uuidv4()}>
-            <TableCell>{Math.round(journey.coveredDistance / 1000)}</TableCell>
+            <TableCell>{convertDistance(journey.coveredDistance)}</TableCell>
             <TableCell>{journey.departureStationName}</TableCell>
-            <TableCell>{Math.round(journey.duration / 60)}</TableCell>
+            <TableCell>{convertDuration(journey.duration)}</TableCell>
             <TableCell>{journey.returnStationName}</TableCell>
             <TableCell>
               <Link to={`/journeys/${journey._id}`}>

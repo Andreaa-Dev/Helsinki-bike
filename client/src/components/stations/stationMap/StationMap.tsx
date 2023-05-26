@@ -11,6 +11,8 @@ mapboxgl.workerClass =
   // eslint-disable-next-line import/no-webpack-loader-syntax
   require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
+const helsinkiCoordinate: [number, number] = [24.945831, 60.192059];
+
 export default function StationMap() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(100);
@@ -32,7 +34,7 @@ export default function StationMap() {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [24.945831, 60.192059],
+      center: helsinkiCoordinate,
       zoom: 9,
     });
   }, []);

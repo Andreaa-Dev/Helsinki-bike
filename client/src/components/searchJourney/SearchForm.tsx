@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import { journeysActions } from "../../redux/slices/journeys";
+import { backendUrl } from "../../redux/thunk/journeys";
 
 type Prop = {
   page: number;
@@ -29,10 +30,9 @@ export default function SearchForm({ page, rowsPerPage }: Prop) {
   }
 
   useEffect(() => {
-    const url = `http://localhost:8000/journeys/search?search=${userInput}&page=${page}&limit=${rowsPerPage}`;
+    const url = `${backendUrl}/journeys/search?search=${userInput}&page=${page}&limit=${rowsPerPage}`;
 
     const id = setTimeout(() => search(url), 500);
-
     return () => {
       clearTimeout(id);
     };

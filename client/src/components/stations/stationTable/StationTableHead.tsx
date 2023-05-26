@@ -16,6 +16,7 @@ import { stationsActions } from "../../../redux/slices/stations";
 export default function StationTableHead() {
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const dispatch = useDispatch();
+
   function sortHandler(sortDirection: SortDirection, field: keyof Station) {
     setSortDirection(sortDirection);
     dispatch(stationsActions.sortStation({ sortDirection, field }));
