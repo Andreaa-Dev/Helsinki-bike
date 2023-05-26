@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-
-import { client as redisClient } from "../server";
+import { redisClient } from "../app";
 
 export const cacheHandler = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { url } = req;
-  const cache = await redisClient.get(url);
+  const { originalUrl } = req;
+  const cache = await redisClient.get(originalUrl);
   if (cache) {
     res.status(200).send(JSON.parse(cache));
     return;
@@ -18,7 +17,10 @@ export const cacheHandler = async (
   // @ts-ignore
   res.json = async (body) => {
     // cache for 1 hour
-    await redisClient.set(url, JSON.stringify(body), { EX: 3600, NX: true });
+    await redisClient.set(originalUrl, JSON.stringify(body), {
+      EX: 60,
+      NX: true,
+    });
     // @ts-ignore
     res.sendJson(body);
   };

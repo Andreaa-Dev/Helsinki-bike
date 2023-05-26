@@ -1,16 +1,11 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { createClient } from "redis";
 
-import app from "./app";
-
-export const client = createClient({
-  url: process.env.REDIS_URI,
-});
+import app, { redisClient } from "./app";
 
 const connectRedis = async () => {
-  await client.connect();
-  client.on("error", (err) => console.error("Redis Client Error", err));
+  await redisClient.connect();
+  redisClient.on("error", (err) => console.error("Redis Client Error", err));
 };
 
 dotenv.config();
@@ -28,4 +23,4 @@ mongoose
     process.exit(1);
   });
 
-connectRedis();
+//connectRedis();

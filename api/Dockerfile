@@ -1,6 +1,7 @@
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY yarn.lock package.json ./
+RUN sed -i '/"redis-memory-server"/d' package.json
 RUN yarn install
 COPY . .
 RUN yarn ts-build
