@@ -2,7 +2,7 @@ import { describe, beforeEach, expect, it } from "@jest/globals";
 import supertest from "supertest";
 import mongoose from "mongoose";
 
-import app from "../src/app";
+import app, { redisClient } from "../src/app";
 import { createJourney } from "./journeys.controller.test";
 import StationModel, { Station } from "../src/models/Station";
 
@@ -45,6 +45,7 @@ export const createStation = async (station: Station) => {
 describe("Stations Controller", () => {
   beforeEach(async () => {
     await mongoose.connection.dropDatabase();
+    await redisClient.FLUSHALL();
   });
 
   it("should get stations with pagination", async () => {

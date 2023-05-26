@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "@jest/globals";
 import supertest from "supertest";
 import mongoose from "mongoose";
 
-import app from "../src/app";
+import app, { redisClient } from "../src/app";
 import JourneyModel, { Journey } from "../src/models/Journey";
 
 export const journey1 = {
@@ -34,6 +34,7 @@ export const createJourney = async (journey: Journey) => {
 describe("Journeys Controller", () => {
   beforeEach(async () => {
     await mongoose.connection.dropDatabase();
+    await redisClient.FLUSHALL();
   });
 
   it("should get journeys with pagination", async () => {
