@@ -1,7 +1,7 @@
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY yarn.lock package.json ./
-RUN yarn install --frozen-lockfile --production=true
+RUN yarn install
 COPY . .
 RUN yarn ts-build
 
