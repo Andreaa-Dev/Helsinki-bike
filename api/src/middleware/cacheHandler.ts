@@ -14,13 +14,13 @@ export const cacheHandler = async (
     return;
   }
 
-  (res as any).sendResponse = res.json;
+  (res as any).sendJson = res.json;
   // @ts-ignore
   res.json = async (body) => {
     // cache for 1 hour
     await redisClient.set(url, JSON.stringify(body), { EX: 3600, NX: true });
     // @ts-ignore
-    res.sendResponse(body);
+    res.sendJson(body);
   };
   next();
 };

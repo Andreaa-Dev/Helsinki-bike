@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+
 import { BadRequestError } from "../helper/apiError";
 import JourneyServices from "../services/journey";
 import Journey from "../models/Journey";
@@ -18,7 +19,6 @@ export const createJourney = async (
     coveredDistance: req.body.coveredDistance,
     duration: req.body.duration,
   });
-
   try {
     res.json(await JourneyServices.createJourney(newJourney));
   } catch (error) {
@@ -29,15 +29,15 @@ export const createJourney = async (
     }
   }
 };
+
 export const getJourneys = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 10;
+  const page = Number(req.query.page as string) || 1;
+  const limit = Number(req.query.limit as string) || 10;
   const skip = (page - 1) * limit;
-
   try {
     res.json(await JourneyServices.findJourneys(skip, limit));
   } catch (error) {
@@ -72,8 +72,8 @@ export const searchJourneys = async (
   next: NextFunction
 ) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const page = Number(req.query.page as string) || 1;
+    const limit = Number(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
 
     res.json(
